@@ -1,0 +1,34 @@
+# MCP Hub registry — declarative catalog (STUB; P0 populates real endpoints).
+# A Chief may call a tool only if it is listed here AND granted in the Chief's chief.yaml.
+version: 1
+
+servers:
+  - name: memory
+    description: Two-tier memory — per-Chief vault (FTS5) + shared semantic (pgvector).
+    path: servers/memory
+    egress: none
+    tools:
+      - { name: wks_memory_capture, kind: write, gate: none }
+      - { name: wks_memory_search,  kind: read,  gate: none }
+      - { name: wks_memory_status,  kind: read,  gate: none }   # PACE-style flags
+      - { name: wks_repo_search,    kind: read,  gate: none }   # 8-repo indexes
+      - { name: wks_repo_read,      kind: read,  gate: none }
+
+  - name: teams
+    description: Microsoft Teams human window (Mattermost adapter is the OSS fallback).
+    path: servers/teams
+    egress: "graph.microsoft.com"     # ARCHITECT-APPROVED entry required (ADR-0007)
+    tools:
+      - { name: wks_teams_post,           kind: write,       gate: none }
+      - { name: wks_teams_await_approval, kind: write-block, gate: human }
+
+  - name: clickup
+    description: ClickUp tickets/cards (Plane adapter is the OSS fallback).
+    path: servers/clickup
+    egress: "api.clickup.com"         # ARCHITECT-APPROVED entry required (ADR-0007)
+    tools:
+      - { name: wks_ticket_list,   kind: read,  gate: none }
+      - { name: wks_ticket_update, kind: write, gate: none }   # status change → gate per Chief
+      - { name: wks_task_assign,   kind: write, gate: none }
+
+# Adding a server: copy servers/_template → write contracts/ → append here (human-gated).

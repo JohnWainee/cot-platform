@@ -1,0 +1,25 @@
+%% COT egress posture (source). Default-deny; explicit allowlist only. See ADR-0007.
+flowchart LR
+  subgraph cot[cot namespace - default-deny egress]
+    G[Geoff]
+    A[Addie]
+    F[Franklin]
+    J[Jules]
+    MEM[memory server]
+    LLM[model serving]
+    TEAMS[teams server]
+    CLICKUP[clickup server]
+  end
+  DNS[(in-cluster DNS only)]
+  GRAPH[graph.microsoft.com]
+  CU[api.clickup.com]
+
+  G --- DNS
+  A --- DNS
+  F --- DNS
+  J --- DNS
+  MEM --- DNS
+  LLM --- DNS
+  TEAMS -->|allowlisted| GRAPH
+  CLICKUP -->|allowlisted| CU
+  %% Everything else: denied. OSS fallback (Mattermost+Plane) removes GRAPH/CU egress.

@@ -1,0 +1,32 @@
+# Franklin — CoDev. Declarative config (STUB; consumed at Phase 0).
+chief: franklin
+role: CoDev
+phase: P0
+domain: Code knowledge across the 8 repos, root-cause analysis, fix specs
+model_tier: reasoning          # strongest tier; coder-capable model (ADR-0003)
+memory:
+  vault: per-chief
+  shared_read: true            # owns heavy use of the 8-repo vector indexes
+  working_soft_cap_chars: 16000
+  working_hard_cap_chars: 32000
+tools:
+  - wks_repo_search            # semantic search over the 8 repo indexes (pgvector)
+  - wks_repo_read              # read file/blob at ref (read-only)
+  - wks_ticket_update
+  - wks_memory_search
+  - wks_memory_capture
+  - wks_teams_post
+  - wks_task_assign
+egress: none                   # repos mirrored internally; no public internet
+human_gates:
+  - propose_fix_spec
+  - escalate_to_human
+repos_indexed:                 # PARAMETERIZED — fill with the real 8 (see phase-0 PRD)
+  - { name: "<repo-1>", kind: "ansible-roles" }
+  - { name: "<repo-2>", kind: "terraform-modules" }
+  - { name: "<repo-3>", kind: "packer-templates" }
+  - { name: "<repo-4>", kind: "powershell" }
+  - { name: "<repo-5>", kind: "tbd" }
+  - { name: "<repo-6>", kind: "tbd" }
+  - { name: "<repo-7>", kind: "tbd" }
+  - { name: "<repo-8>", kind: "tbd" }

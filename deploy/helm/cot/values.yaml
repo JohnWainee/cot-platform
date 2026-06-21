@@ -1,0 +1,29 @@
+# COT umbrella chart values (STUB). Architect-owned (see CODEOWNERS).
+global:
+  namespace: cot
+  imageRegistry: "<internal-mirror>"   # air-gapped; no public pulls (ADR-0007)
+  storageClass: "<rke2-storageclass>"
+
+# Egress is DENIED by default cluster-wide; per-Chief allowlists are explicit.
+egress:
+  default: deny
+  allow: []        # filled from the egress matrix (master PRD → Security)
+
+modelServing:
+  engine: ollama   # P0; vLLM reasoning tier added P1+ (ADR-0003)
+
+memory:
+  shared:
+    engine: pgvector   # ADR-0004
+  perChief:
+    enabled: true      # PACE-style vaults on a PVC per Chief
+
+humanWindow:
+  chat: teams          # mattermost = OSS fallback (ADR-0005)
+  tickets: clickup     # plane = OSS fallback
+
+chiefs:
+  geoff:    { enabled: false }   # enabled per phase, after PRD approval
+  addie:    { enabled: false }
+  franklin: { enabled: false }
+  jules:    { enabled: false }

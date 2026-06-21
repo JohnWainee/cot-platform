@@ -1,0 +1,8 @@
+apiVersion: v2
+name: cot
+description: Chief of Teams — umbrella chart for RKE2 (STUB; no templates yet)
+type: application
+version: 0.0.0
+appVersion: "0.0.0-prd"
+# Subcharts (memory/pgvector, orchestrator, mcp-hub, chiefs, model-serving) are added
+# per phase. Dependencies intentionally empty during the PRD phase.
