@@ -1,0 +1,38 @@
+# Secrets — never commit. Vault is the source of truth.
+*.env
+.env*
+*.key
+*.pem
+secrets/
+*-secret.yaml
+
+# Local model artifacts / large blobs
+models/
+*.gguf
+*.safetensors
+
+# Memory vaults & indexes (per-Chief data is runtime state, not source)
+**/vault/
+*.db
+*.sqlite
+*.sqlite3
+
+# Node / tooling
+node_modules/
+npm-debug.log*
+
+# Python (MCP servers, later)
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Helm
+deploy/helm/**/charts/
+*.tgz
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
