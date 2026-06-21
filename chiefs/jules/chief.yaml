@@ -1,0 +1,23 @@
+# Jules — CoDevOps. Declarative config (STUB; consumed at Phase 0).
+chief: jules
+role: CoDevOps
+phase: P0                       # framework/MCP Hub work is P0
+domain: COT framework + MCP Hub; fulfills tooling/skill requests from other Chiefs
+model_tier: reasoning
+memory:
+  vault: per-chief
+  shared_read: true
+  working_soft_cap_chars: 16000
+  working_hard_cap_chars: 32000
+tools:
+  - wks_hub_list               # list registered MCP servers/tools
+  - wks_hub_scaffold           # scaffold a new MCP server from template (gated)
+  - wks_repo_read
+  - wks_ticket_update
+  - wks_memory_search
+  - wks_memory_capture
+  - wks_teams_post
+egress: none                   # internal package mirror only
+human_gates:
+  - register_new_mcp_server    # adding tools to the Hub needs sign-off
+  - propose_pr

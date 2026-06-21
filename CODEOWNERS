@@ -1,0 +1,20 @@
+# CODEOWNERS — architect-owned vs engineer-owned boundary.
+# See CONTRIBUTING.md "Sandbox allowlist & escalation boundaries".
+# Until a team is added, the project owner reviews everything; the structure below
+# documents intent and is enforced once GitHub teams exist.
+
+# Default owner
+*                               @JohnWainee
+
+# Architect-owned — require sign-off, never changed unattended
+/docs/prd/                      @JohnWainee
+/docs/adr/                      @JohnWainee
+/CODEOWNERS                     @JohnWainee
+/deploy/k8s/network-policies/   @JohnWainee
+/deploy/helm/cot/values.yaml    @JohnWainee
+
+# Engineer-owned — changeable within guardrails (still via PR)
+# /chiefs/                      @cot-engineers
+# /mcp-hub/servers/             @cot-engineers
+# /scripts/                     @cot-engineers
+# /docs/runbooks/               @cot-engineers

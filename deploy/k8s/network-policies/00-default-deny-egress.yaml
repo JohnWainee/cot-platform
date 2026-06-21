@@ -1,0 +1,17 @@
+# Default-deny egress for the cot namespace (STUB). Apply FIRST.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-egress
+  namespace: cot
+spec:
+  podSelector: {}          # all pods
+  policyTypes: [Egress]
+  egress:
+    # Allow only in-cluster DNS; everything else is denied until an allowlist adds it.
+    - to: []
+      ports:
+        - { protocol: UDP, port: 53 }
+        - { protocol: TCP, port: 53 }
+# Per-Chief allowlists (e.g. teams → graph.microsoft.com) are added as separate,
+# architect-reviewed policies that reference the egress matrix.

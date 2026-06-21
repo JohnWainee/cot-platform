@@ -1,0 +1,31 @@
+%% COT component diagram (source). Render: mmdc -i component.mmd -o component.svg
+flowchart TB
+  subgraph Humans
+    TEAMS[Teams / Mattermost]
+    CLICKUP[ClickUp / Plane]
+  end
+  subgraph Chiefs[Chiefs - LangGraph workers]
+    GEOFF[Geoff]
+    ADDIE[Addie]
+    FRANK[Franklin]
+    JULES[Jules]
+  end
+  ORCH[Temporal orchestrator]
+  BUS[NATS bus]
+  HUB[MCP Hub]
+  V[(Per-Chief vaults: MD + SQLite FTS5)]
+  PG[(Shared semantic: Postgres + pgvector)]
+  LLM[Model serving: Ollama then vLLM]
+  VAULT[(HashiCorp Vault)]
+  OBS[Prometheus + Grafana + Loki]
+
+  TEAMS <--> HUB
+  CLICKUP <--> HUB
+  ORCH --- Chiefs
+  Chiefs --- HUB
+  Chiefs -. notify .- BUS
+  HUB --- V
+  HUB --- PG
+  Chiefs --- LLM
+  HUB --- VAULT
+  Chiefs --- OBS

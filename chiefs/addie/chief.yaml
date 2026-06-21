@@ -1,0 +1,23 @@
+# Addie — CoSupport. Declarative config (STUB; consumed at Phase 0).
+chief: addie
+role: CoSupport
+phase: P0
+domain: L3 internal support — triage, diagnostics, escalation
+model_tier: light              # fast triage model; escalates reasoning to Franklin
+memory:
+  vault: per-chief
+  shared_read: true
+  working_soft_cap_chars: 16000
+  working_hard_cap_chars: 32000
+tools:
+  - wks_ticket_list
+  - wks_ticket_update
+  - wks_memory_search
+  - wks_memory_capture
+  - wks_diag_run            # read-only diagnostics (no remediation)
+  - wks_teams_post
+  - wks_task_assign
+egress: none
+human_gates:
+  - escalate_to_human
+  - return_to_l2

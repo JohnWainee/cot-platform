@@ -1,0 +1,24 @@
+# Geoff — CoOrchestration. Declarative config (STUB; consumed at Phase 0).
+chief: geoff
+role: CoOrchestration
+phase: P0
+domain: Task assignment, scheduling, human-in-loop gating, standups
+model_tier: reasoning          # see ADR-0003 model-per-Chief matrix
+memory:
+  vault: per-chief             # private episodic memory (MD + SQLite FTS5)
+  shared_read: true            # may read shared semantic tier
+  working_soft_cap_chars: 16000
+  working_hard_cap_chars: 32000
+tools:                         # granted MCP tools (wks_*, see tools.md)
+  - wks_ticket_list
+  - wks_ticket_update
+  - wks_teams_post
+  - wks_teams_await_approval
+  - wks_memory_capture
+  - wks_memory_search
+  - wks_task_assign
+egress: none                   # internal-only; no outbound internet (ADR-0007)
+human_gates:                   # nothing here acts without an explicit human gate
+  - propose_pr
+  - assign_to_human
+  - close_ticket
