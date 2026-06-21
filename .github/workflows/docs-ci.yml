@@ -46,4 +46,4 @@ jobs:
         env:
           PR_TITLE: ${{ github.event.pull_request.title }}
         run: |
-          echo "$PR_TITLE" | npx --yes @commitlint/cli@19 --extends @commitlint/config-conventional
+          echo "$PR_TITLE" | npx --yes --package @commitlint/cli@19 --package @commitlint/config-conventional@19 -- commitlint --extends @commitlint/config-conventional
