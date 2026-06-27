@@ -51,12 +51,11 @@ contribution and deploy boundary for every Chief's memory).
 home for the two-tier memory MCP server. The monorepo's `mcp-hub/servers/memory/`
 becomes a thin reference/pointer to that repo, not a second implementation.
 
-Because this session's GitHub access is scoped to `cot-platform`, the standalone
-repo could not be created automatically. The full **P0 scaffold** (package skeleton,
-adapted `wks_memory_*` contracts, architecture notes, CI, no business logic) is
-staged at [`incubating/cot-memory/`](../../incubating/cot-memory/README.md) and is
-ready to be lifted into the `cot-memory` repo once it exists (extraction steps are in
-that directory's README).
+The full **P0 scaffold** (package skeleton, adapted `wks_memory_*` contracts,
+architecture notes, CI, no business logic) was first staged in this monorepo under
+`incubating/cot-memory/`, then extracted — with history preserved via
+`git subtree split` — into the standalone `JohnWainee/cot-memory` repo, which is now
+its home. The staging directory has since been removed.
 
 ## Consequences
 
@@ -66,6 +65,7 @@ that directory's README).
 - **Negative / mitigations:** a separate repo to operate — mitigated by reusing the
   same docs-CI conventions and keeping `mcp-hub/servers/memory/` as the single
   in-monorepo pointer. Upstream drift — mitigated by cherry-picking, not tracking.
-- **Follow-ups:** create the `cot-memory` repo and push the staged scaffold; carry
-  the upstream `smriti-mcp` attribution/licence into it (see its `NOTICE.md`); set the
-  embedding model and HNSW params when Tier-2 lands (ADR-0004 placeholders).
+- **Follow-ups:** the `cot-memory` repo now hosts the extracted scaffold and carries
+  the upstream `smriti-mcp` attribution/licence (see its `NOTICE.md` and
+  `LICENSE.smriti-mcp`); set the embedding model and HNSW params when Tier-2 lands
+  (ADR-0004 placeholders).
