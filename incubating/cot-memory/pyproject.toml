@@ -1,0 +1,40 @@
+# cot-memory — two-tier memory MCP server for Chief of Teams.
+# Scaffold only: dependency versions are placeholders, pin them at implementation.
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cot-memory"
+version = "0.0.0"
+description = "Two-tier memory MCP server for Chief of Teams (fork of smriti-mcp)."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+
+# Pin at implementation time. Tier 1 (P0) needs only the MCP SDK + stdlib sqlite3
+# (FTS5) + a YAML parser. Tier 2 (P1) adds a Postgres/pgvector client.
+dependencies = [
+  # "mcp>=1.0",
+  # "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+# Tier 2 (P1) — shared semantic store. Not needed for the P0 Tier-1 server.
+tier2 = [
+  # "psycopg[binary]>=3.1",
+]
+dev = [
+  # "pytest>=8",
+  # "ruff>=0.5",
+]
+
+[project.scripts]
+cot-memory = "cot_memory.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/cot_memory"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
